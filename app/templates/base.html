@@ -1,0 +1,38 @@
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+
+	{{ super() }}
+	<!-- Se incluyen metadatos de HTML -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/main.css')}}">
+	<title> {% block title %} Flask Tutorial | {% endblock %} </title>
+{% endblock %}
+
+<!-- Los flash se deben renderear en cualquier lado por eso se incluye en el base.html -->
+
+<!-- Incluimos Body de la web -->
+{% block body %}
+	
+	<!-- Incluir Navbar -->
+	{% block navbar %}
+		{% include 'navbar.html' %}
+	{% endblock %}
+
+	{% for message in get_flashed_messages() %}
+		<div class="alert alert-success alert-dismissible">
+			<button type="button" 
+					data-dismiss="alert"
+					class="close">&times;</button>
+					{{message}}
+		</div>
+	{% endfor %}
+
+	<!-- Incluir contenido -->
+	{% block content %}
+	{% endblock %}
+
+	<!-- Si queremos utilizar los scripts de bootstrap es necesario importarlos -->
+	{% block scripts %}
+		{{ super() }}
+	{% endblock %}
+
+{% endblock %}
